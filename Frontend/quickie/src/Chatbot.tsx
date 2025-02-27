@@ -15,7 +15,11 @@ const Chatbot: React.FC = () => {
   const BASE_URL = "http://localhost:8000";
 
   useEffect(() => {
-    fetch(`${BASE_URL}/chat/history`)
+    fetch(`${BASE_URL}/chat/history`, {
+      method: "GET",
+      mode:"cors",
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => setMessages(data.history || []))
       .catch((err) => console.error("Error fetching history:", err));
@@ -34,7 +38,9 @@ const Chatbot: React.FC = () => {
     try {
       const response = await fetch(`${BASE_URL}/chat`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        mode:"cors",
+        credentials: "include",
+        headers: { "Content-Type": "application/json", "Accept":"application/json", },
         body: JSON.stringify({ prompt: input }),
       });
 
@@ -63,15 +69,14 @@ const Chatbot: React.FC = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        width: "450px", // Responsive width
-        height: "500px", // Maintain 4:3 aspect ratio
+        width: "450px",
+        height: "500px",
         backgroundColor: "#141618",
         overflow: "hidden",
         margin: "auto",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
       }}
     >
-      {/* Scrollable Chat Area */}
       <div
         style={{
           flex: 1,
@@ -136,7 +141,6 @@ const Chatbot: React.FC = () => {
         <div ref={chatEndRef} />
       </div>
 
-      {/* Fixed Input Box */}
       <div
         style={{
           display: "flex",
@@ -166,13 +170,12 @@ const Chatbot: React.FC = () => {
           onClick={sendMessage}
           style={{
             marginLeft: "10px",
-            padding: "12px 18px",
+            padding: "8px 10px",
             fontSize: "16px",
             cursor: "pointer",
-            backgroundColor: "#007bff",
             color: "white",
             border: "none",
-            borderRadius: "20px",
+            borderRadius: "50px",
           }}
           disabled={loading}
         >
@@ -180,7 +183,9 @@ const Chatbot: React.FC = () => {
             "..."
           ) : (
             <img
-              src="https://img.icons8.com/3d-fluency/24/paper-plane.png"
+              width="25"
+              height="25"
+              src="https://img.icons8.com/ios-filled/50/long-arrow-up.png"
               alt="send"
             />
           )}

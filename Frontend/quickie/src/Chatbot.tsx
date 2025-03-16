@@ -12,7 +12,7 @@ const Chatbot: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const BASE_URL = "http://localhost:8000";
+  const BASE_URL = "https://quickie-2qfp.onrender.com";
 
   useEffect(() => {
     fetch(`${BASE_URL}/chat/history`, {

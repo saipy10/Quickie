@@ -26,7 +26,7 @@ redis_client = redis.Redis(
 
 # Constants
 SESSION_COOKIE_NAME = "chat_session"
-SESSION_EXPIRY = 86400  # 24 hours
+SESSION_EXPIRY = 86400
 
 class ChatRequest(BaseModel):
     prompt: str
@@ -45,9 +45,10 @@ def get_or_create_session(request: Request, response: Response, session_id: str 
             samesite="None",  # Required for cross-origin requests
             secure=True,  # Required for Chrome extensions
         )
-        print(f"🟢 New session created: {session_id}")
+        # print(f"🟢 New session created: {session_id}")
     else:
-        print(f"🔄 Existing session found: {session_id}")
+        # print(f"🔄 Existing session found: {session_id}")
+        pass
 
     return session_id
 

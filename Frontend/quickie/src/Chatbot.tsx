@@ -17,7 +17,7 @@ const Chatbot: React.FC = () => {
   useEffect(() => {
     fetch(`${BASE_URL}/chat/history`, {
       method: "GET",
-      mode:"cors",
+      mode: "cors",
       credentials: "include",
     })
       .then((res) => res.json())
@@ -38,9 +38,12 @@ const Chatbot: React.FC = () => {
     try {
       const response = await fetch(`${BASE_URL}/chat`, {
         method: "POST",
-        mode:"cors",
+        mode: "cors",
         credentials: "include",
-        headers: { "Content-Type": "application/json", "Accept":"application/json", },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({ prompt: input }),
       });
 
